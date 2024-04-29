@@ -13,7 +13,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('systems', SystemController::class)->names([
+    'index' => 'system.index',
     'create' => 'systems.create',
     'store' => 'systems.store',
+    'edit' => 'systems.edit',
+    'update' => 'systems.update',
+    'destroy' => 'systems.destroy',
 ]);
 

@@ -13,7 +13,8 @@ class SystemController extends Controller
      */
     public function index()
     {
-        //
+        $systems = System::all();
+        return view('systems.index', compact('systems'));
     }
 
     /**
@@ -37,12 +38,12 @@ class SystemController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            Storage::disk('local')->put('images', $request->file('image'));
+            Storage::disk('local')->put('public', $request->file('image'));
             $validated['image'] = $request->file('image')->hashName();
         }
 
         $system = System::create($validated);
-        
+
         return redirect()->route('home');
     }
 
@@ -59,7 +60,13 @@ class SystemController extends Controller
      */
     public function edit(System $system)
     {
-        //
+        $form = [
+            'name' => $system->name,
+            'url' => $system->url,
+            'description' => $system->description,
+            'image' => $system->image,
+        ];
+        return view('systems.edit', compact('system', 'form'));
     }
 
     /**
@@ -67,7 +74,21 @@ class SystemController extends Controller
      */
     public function update(Request $request, System $system)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'url' => 'required',
+            'description' => 'nullable',
+            'image' => 'nullable|image',
+        ]);
+
+        if ($request->hasFile('image')) {
+            Storage::disk('local')->put('images', $request->file('image'));
+            $validated['image'] = $request->file('image')->hashName();
+        }
+
+        $system->update($validated);
+
+        return redirect()->route('home');
     }
 
     /**
@@ -75,6 +96,12 @@ class SystemController extends Controller
      */
     public function destroy(System $system)
     {
-        //
+        if ($system->image) {
+            Storage::disk('local')->delete('images/' . $system->image);
+        }
+
+        $system->delete();
+
+        return redirect()->route('home');
     }
 }

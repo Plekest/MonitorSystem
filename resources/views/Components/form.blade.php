@@ -1,3 +1,5 @@
+<!-- /home/pedro/base/application/MonitorSystem/resources/views/Components/form.blade.php -->
+
 <style>
     /* Estilização para o botão */
     .custom-file-upload {
@@ -17,32 +19,34 @@
     }
 </style>
 
-<form enctype="multipart/form-data" action="{{ route('systems.store') }}" method="POST">
-    @csrf
-    <div class="form-row">
-        <div class="col-md-4 mb-3">
-            <label for="validationDefault01">Nome do Sistema</label>
-            <input name="name" type="text" class="form-control" id="validationDefault01" placeholder="Nome do Sistema" required>
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="validationDefault02">URL</label>
-            <input name="url" type="text" class="form-control" id="validationDefault02" placeholder="URL" required>
-        </div>
+
+@csrf
+<div class="form-row">
+    <div class="col-md-4 mb-3">
+        <label for="validationDefault01">Nome do Sistema</label>
+        <input name="name" type="text" class="form-control" id="validationDefault01" placeholder="Nome do Sistema"
+            required value="{{ $form['name'] ?? '' }}">
     </div>
-    <div class="form-row">
-        <div class="col-md-8 mb-3">
-            <label for="validationDefault03">Descrição</label>
-            <textarea name="description" class="form-control" id="validationDefault03" placeholder="Descrição" required></textarea>
-        </div>
+    <div class="col-md-4 mb-3">
+        <label for="validationDefault02">URL</label>
+        <input name="url" type="text" class="form-control" id="validationDefault02" placeholder="URL" required
+            value="{{ $form['url'] ?? '' }}">
     </div>
-    <div class="form-row">
-        <div class="col-md-12 mb-3">
-            <label for="validationDefault06">Imagem: </label>
-            <label class="custom-file-upload">
-                <input type="file" id="validationDefault06" name="image" accept="image/*" required>
-                Adicionar arquivo
-            </label>
-        </div>
+</div>
+<div class="form-row">
+    <div class="col-md-8 mb-3">
+        <label for="validationDefault03">Descrição</label>
+        <textarea name="description" class="form-control" id="validationDefault03" placeholder="Descrição" required>{{ $form['description'] ?? '' }}</textarea>
     </div>
-    <button class="btn btn-primary" type="submit">Enviar</button>
-</form>
+</div>
+<div class="form-row">
+    <div class="col-md-12 mb-3">
+        <label for="validationDefault06">Imagem: </label>
+        <label class="custom-file-upload">
+            <input type="file" id="validationDefault06" name="image" accept="image/*" value="{{ $form['image'] ?? '' }}">
+            Adicionar arquivo
+        </label>
+    </div>
+</div>
+<button class="btn btn-primary" type="submit">Enviar</button>
+
