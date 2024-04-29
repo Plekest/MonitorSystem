@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $systems = System::all();
-        return view('home', compact('systems'));
+        return view('home');
     }
 }
