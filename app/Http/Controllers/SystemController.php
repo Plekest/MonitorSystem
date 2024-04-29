@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\System;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SystemController extends Controller
 {
@@ -28,9 +29,19 @@ class SystemController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        $system = System::create($request->all());
-        $system->save();
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'url' => 'required',
+            'description' => 'nullable',
+            'image' => 'nullable|image',
+        ]);
+
+        if ($request->hasFile('image')) {
+            Storage::disk('local')->put('images', $request->file('image'));
+        }
+
+        $system = System::create($validated);
+
         return redirect()->route('home');
     }
 

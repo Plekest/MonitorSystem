@@ -10,5 +10,11 @@ class System extends Model
     use HasFactory;
 
     protected $table = 'systems';
-    protected $fillable = ['name', 'description', 'status'];
+
+    protected $fillable = [
+        'name',
+        'url',
+        'description',
+        'image',
+    ];
 }

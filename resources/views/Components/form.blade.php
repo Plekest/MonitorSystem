@@ -17,22 +17,22 @@
     }
 </style>
 
-<form enctype="multipart/form-data" action="{{ route('systems.store') }}">
+<form enctype="multipart/form-data" action="{{ route('systems.store') }}" method="POST">
     @csrf
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <label for="validationDefault01">Nome do Sistema</label>
-            <input type="text" class="form-control" id="validationDefault01" placeholder="Nome do Sistema" required>
+            <input name="name" type="text" class="form-control" id="validationDefault01" placeholder="Nome do Sistema" required>
         </div>
         <div class="col-md-4 mb-3">
             <label for="validationDefault02">URL</label>
-            <input type="text" class="form-control" id="validationDefault02" placeholder="URL" required>
+            <input name="url" type="text" class="form-control" id="validationDefault02" placeholder="URL" required>
         </div>
     </div>
     <div class="form-row">
         <div class="col-md-8 mb-3">
             <label for="validationDefault03">Descrição</label>
-            <textarea class="form-control" id="validationDefault03" placeholder="Descrição" required></textarea>
+            <textarea name="description" class="form-control" id="validationDefault03" placeholder="Descrição" required></textarea>
         </div>
     </div>
     <div class="form-row">

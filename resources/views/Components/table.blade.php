@@ -14,12 +14,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
         @foreach ($systems as $system)
+        <tr>
+            <td>{{$system->id}}</td>
+            <td>{{ asset('storage/'.$system->image) }}</td>
             <td>{{$system->name}}</td>
-            <td>{{$system->name}}</td>
-            <td>{{$system->name}}</td>
-            <td>@{{$system->name}}</td>
+            <td>@{{$system->url}}</td>
             <td>
                 <!-- Botão de editar -->
                 <button type="button" class="btn btn-primary">
@@ -30,8 +30,8 @@
                     <i class="fas fa-trash-alt"></i> Excluir
                 </button>
             </td>
-        @endforeach
         </tr>
+        @endforeach
     </tbody>
     <tfoot class="thead-light">
         <tr>
