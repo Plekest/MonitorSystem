@@ -38,10 +38,11 @@ class SystemController extends Controller
 
         if ($request->hasFile('image')) {
             Storage::disk('local')->put('images', $request->file('image'));
+            $validated['image'] = $request->file('image')->hashName();
         }
 
         $system = System::create($validated);
-
+        
         return redirect()->route('home');
     }
 
